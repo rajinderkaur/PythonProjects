@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% extends 'music/base.html' %}
+   <title>Music</title>
+</head>
+<body>
+{% block body %}
+{% if all_albums %}
+<h3>Here are all my albums</h3>
+<ul>
+    {% for album in all_albums  %}
+    <!--Here is the example for using harcoded urls,
+    for non-hardcoded, we are using name field from url file to replace the /music/album.id
+    <li><a href="/music/{{album.id}}">{{album.album_title}}</a> </li>
+below- music:detail -> its the appname:method so we dnt get confused
+    -->
+    <li><a href="{% url 'music:detail' album.id %}">{{album.album_title}}</a> </li>
+    {% endfor %}
+</ul>
+{% else %}
+    <h3>You don't have any albums</h3>
+{% endif %}
+{% endblock %}
+</body>
+</html>
