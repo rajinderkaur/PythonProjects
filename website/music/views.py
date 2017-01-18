@@ -4,6 +4,8 @@ from .models import Album
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from .models import Album, Song
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
 
 #please check the commented code too
 
@@ -60,5 +62,22 @@ from .models import Album, Song
 #         return render(request, 'music/detail.html', {'album': album})
 
 
+class IndexView(generic.ListView):
+    template_name = 'music/index.html'
+    #used to represent the object
+    context_object_name = 'all_albums'
+
+#querying the database to get all the albums
+    def get_queryset(self):
+        return Album.objects.all()
+
+class DetailView(generic.DetailView):
+    # this means which table details we need to display
+    model = Album
+    template_name = 'music/detail.html'
 
 
+class AlbumCreate(CreateView):
+    #what kind of object you need to save in DB, in this case it is album
+    model = Album
+    fields = ['artist', 'album_title', 'genre', 'album_logo']

@@ -20,7 +20,7 @@
 {% if error_message %}
     <p><strong>{{error_message}}</strong></p>
 {% endif %}
-<form action="{% url 'music:favorite' album.id %}" method="post">
+<form action="{% url 'music:detail' album.id %}" method="post">
     {% csrf_token %}
     {% for song in album.song_set.all %}
         <input type="radio" id="song{{ forloop.counter}}" name="song" value="{{song.id}}">
