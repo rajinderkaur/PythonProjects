@@ -24,6 +24,8 @@ urlpatterns = [
     # /music/
     url(r'^$', views.IndexView.as_view(), name='index'),
 
+    url(r'^register/$', views.UserFormView.as_view(), name='register'),
+
     # /music/album_id/
     #(? P<album_id> isrepresenting 712 as a one word and we can use album_id to save a id), 0-9 is a range for id's
    # url(r'^(?P<album_id>[0-9]+)/$', views.IndexView.as_view, name='detail'),
@@ -33,4 +35,10 @@ urlpatterns = [
 
     # /music/album/add/
     url(r'album/add/$', views.AlbumCreate.as_view(), name='album-add'),
+
+# /music/album/2/
+    url(r'album/(?P<pk>[0-9]+)/$', views.AlbumUpdate.as_view(), name='album-update'),
+
+# /music/album/2/delete
+    url(r'album/(?P<pk>[0-9]+)/delete/$', views.AlbumDelete.as_view(), name='album-delete'),
 ]
